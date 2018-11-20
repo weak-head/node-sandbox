@@ -3,6 +3,7 @@
 */
 
 const http = require('http');
+const fs   = require('fs');
 
 const log = (name, data) => {
     console.log(`--- ${name} START ---`);
@@ -10,7 +11,7 @@ const log = (name, data) => {
     console.log(`--- ${name} END -----\n`);
 }
 
-// path: /
+// request: GET /
 const rootHandler = (req, res) => {
     res.write('<html>');
     res.write('<head><title>Put your dirty message here:</title></head>');
@@ -21,16 +22,21 @@ const rootHandler = (req, res) => {
     res.end();
 }
 
-// path: /message
+// request: POST /message
 const messageHandler = (req, res) => {
+    fs.writeFileSync('message.txt', '<>');
 
+    res.statusCode = 302;
+    res.setHeader('Location', '/');
+    res.end();
 }
 
 const PATH    = 0;
-const HANDLER = 1;
+const METHOD  = 1;
+const HANDLER = 2;
 const pathMap = [
-    ['/', rootHandler],
-    ['/message', messageHandler]
+    ['/', 'GET', rootHandler],
+    ['/message', 'POST', messageHandler]
 ]
 
 const httpServer = http.createServer((req, res) => {
@@ -46,11 +52,12 @@ const httpServer = http.createServer((req, res) => {
 
     let handledBy = null;
     for (let pathRoute of pathMap)
-        if (pathRoute[PATH] === req.url) {
-            pathRoute[HANDLER](req, res);
-            handledBy = pathRoute;
-            res.end();
-            break;
+        if (pathRoute[PATH] === req.url &&
+            pathRoute[METHOD] === req.method) {
+                pathRoute[HANDLER](req, res);
+                handledBy = pathRoute;
+                res.end();
+                break;
         }
 
     if (!handledBy) {
