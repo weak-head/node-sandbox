@@ -1,5 +1,5 @@
 # node-sandbox
 
-## Links
+## Content
 
-- [Funky http server (with vscode debug in docker)](simple-server/)
+- [native http server (with vscode debug in docker)](native-http/)
