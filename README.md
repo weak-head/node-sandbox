@@ -2,4 +2,4 @@
 
 ## Content
 
-- [native http server (with vscode debug in docker)](native-http/)
+- [vanilla http server (with vscode debug in docker)](vanilla-http/)

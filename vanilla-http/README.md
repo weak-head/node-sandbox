@@ -1,4 +1,4 @@
-# native http server
+# vanilla http server
 
 ```bash
 # start the http server in a docker container
