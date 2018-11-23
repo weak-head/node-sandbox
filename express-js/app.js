@@ -2,30 +2,18 @@ const express = require('express');
 
 const app = express();
 
+const loggerMiddleware = require('./middlewares/logger');
+const nopageMiddleware = require('./middlewares/nopage');
+
+const messageRoutes = require('./routes/message');
+const rootRoutes = require('./routes/root');
+
 app.use(express.urlencoded({extended: false}));
+app.use(loggerMiddleware);
 
-app.use((req, res, next) => {
-    console.log('--- REQUEST ---');
-    console.log(req.method + ' ' + req.url);
-    console.log(req.body);
-    console.log('----------------\n');
-    next();
-})
+app.use('/message', messageRoutes);
+app.use(rootRoutes);
 
-app.get('/message', (req, res, next) => {
-    res.send('<form action="/message" method="POST"> \
-                <input type="text" name="msg"> \
-                <button type="submit">Send</button> \
-              </form>');
-});
-
-app.post('/message', (req, res, next) => {
-    console.log('-> ' + JSON.stringify(req.body) + ' <-\n');
-    res.redirect('/message');
-});
-
-app.use('/', (req, res, next) => {
-    res.send('Root');
-});
+app.use(nopageMiddleware);
 
 app.listen(4000);
