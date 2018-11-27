@@ -2,11 +2,15 @@ const express = require('express');
 const messageRoutes = express.Router();
 
 messageRoutes.get('/', (req, res, next) => {
-    res.send('OK');
+    res.render('message',
+        { msgDocTitle: 'Input your message'
+        , msgSubmitBtn: 'Send message'
+        , msgSubmitTitle: 'Message:' });
 });
 
 messageRoutes.post('/', (req, res, next) => {
-    res.send('OK');
+    console.log(req.body);
+    res.redirect('/message');
 });
 
 module.exports = messageRoutes;

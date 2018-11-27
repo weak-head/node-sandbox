@@ -4,6 +4,11 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title Input message
+        title #{msgDocTitle}
         link(rel="stylesheet", href="/css/main.css")
     body
+        form.message-form(action="message", method="POST")
+            .form-control
+                label(for="title") #{msgSubmitTitle}
+                input(type="text", name="message")#message
+            button.btn(type="submit") #{msgSubmitBtn}
