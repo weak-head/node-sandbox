@@ -3,7 +3,7 @@ const messageRoutes = express.Router();
 
 messageRoutes.get('/', (req, res, next) => {
     res.render('message',
-        { msgDocTitle: 'Input your message'
+        { docTitle: 'Input your message'
         , msgSubmitBtn: 'Send message'
         , msgSubmitTitle: 'Message:' });
 });
