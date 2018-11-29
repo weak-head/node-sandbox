@@ -1,0 +1,12 @@
+{
+  "name": "sequelize-orm",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
