@@ -11,3 +11,7 @@
 - [ejs](template-ejs/)
 - [pug](template-pug/)
 - [handlebars](template-handlebars/)
+
+### Db
+
+- [sequelize](sequelize-orm/)
