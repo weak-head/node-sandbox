@@ -1,7 +1,11 @@
 const Sq = require('sequelize');
 const db = require('../db');
 
-const Product = db.define('Product', {
+const User = require('./user');
+const Cart = require('./cart');
+const CartItem = require('./cart-item');
+
+const Product = db.define('product', {
     id: {
         type: Sq.INTEGER,
         autoIncrement: true,
@@ -25,5 +29,8 @@ const Product = db.define('Product', {
         allowNull: false
     }
 });
+
+Product.belongsTo(User, { constraints: false, onDelete: 'CASCADE'});
+Product.belongsToMany(Cart, { through: CartItem });
 
 module.exports = Product;

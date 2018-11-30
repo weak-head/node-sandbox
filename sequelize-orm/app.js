@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 
 const db = require('./db');
-const Product = require('./models/product');
+const Product  = require('./models/product');
+const User     = require('./models/user');
+const Cart     = require('./models/cart');
+const CartItem = require('./models/cart-item');
 
 app.use(express.json());
 
@@ -61,6 +64,7 @@ app.delete('/api/products/:productId', (req, res, next) => {
             return product.destroy();
         })
         .then(result => {
+            console.log('Deleted');
             res.status(200).send('OK');
         })
         .catch(err => {
@@ -92,7 +96,7 @@ app.get('/api/products/:productId', (req, res, next) => {
         });
 });
 
-db.sync()
+db.sync({force: true})
   .then(result => {
       console.log('\n> running on 3000');
       app.listen(3000);
