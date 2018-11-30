@@ -6,7 +6,7 @@ const Product = require('./models/product');
 
 app.use(express.json());
 
-app.post('/api/product', (req, res, next) => {
+app.post('/api/products', (req, res, next) => {
     const title       = req.body.title;
     const imageUrl    = req.body.imageUrl;
     const price       = req.body.price;
@@ -27,7 +27,7 @@ app.post('/api/product', (req, res, next) => {
     });
 });
 
-app.put('/api/product/:productId', (req, res, next) => {
+app.put('/api/products/:productId', (req, res, next) => {
     const prodId      = req.params.productId;
     const title       = req.body.title;
     const imageUrl    = req.body.imageUrl;
@@ -44,7 +44,7 @@ app.put('/api/product/:productId', (req, res, next) => {
         })
         .then(result => {
             console.log('Updated');
-            //res.redirect(`/api/product/${prodId}`);
+            //res.redirect(`/api/products/${prodId}`);
             res.status(200).send('OK');
         })
         .catch(err => {
@@ -53,7 +53,23 @@ app.put('/api/product/:productId', (req, res, next) => {
         });
 });
 
-app.get('/api/product/all', (req, res, next) => {
+app.delete('/api/products/:productId', (req, res, next) => {
+    const productId = req.params.productId;
+
+    Product.findByPk(productId)
+        .then(product => {
+            return product.destroy();
+        })
+        .then(result => {
+            res.status(200).send('OK');
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(500).send('Boom!');
+        });
+});
+
+app.get('/api/products', (req, res, next) => {
     Product.findAll()
         .then(result => {
             res.send(result);
@@ -64,7 +80,7 @@ app.get('/api/product/all', (req, res, next) => {
         });
 });
 
-app.get('/api/product/:productId', (req, res, next) => {
+app.get('/api/products/:productId', (req, res, next) => {
     const prodId = req.params.productId;
 
     Product.findByPk(prodId)

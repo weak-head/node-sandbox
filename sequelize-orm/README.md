@@ -1,5 +1,6 @@
 # sequelize-orm
 
+> Quick start
 ```bash
 # start detached mssql db
 docker-compose up -d
@@ -16,13 +17,13 @@ curl --header "Content-Type: application/json" \
             "price": 49.99,
             "description": "Dedicated video game console by Nintendo, which emulates the Nintendo Entertainment System (NES)."
           }' \
-  http://localhost:3000/api/product
+  http://localhost:3000/api/products
 
-# get the list of products
-curl http://localhost:3000/api/product/all
+# get the list of all products
+curl http://localhost:3000/api/products
 
 # get the product by id
-curl http://localhost:3000/api/product/1
+curl http://localhost:3000/api/products/1
 
 # update the product
 curl --header "Content-Type: application/json" \
@@ -33,9 +34,23 @@ curl --header "Content-Type: application/json" \
             "price": 69.99,
             "description": "Dedicated video game console by Nintendo."
           }' \
-  http://localhost:3000/api/product/1
+  http://localhost:3000/api/products/1
 
 # get the updated product
-curl http://localhost:3000/api/product/1
+curl http://localhost:3000/api/products/1
 
+# delete the product
+curl --request DELETE http://localhost:3000/api/products/1
+
+# get the list of products
+curl http://localhost:3000/api/products
+```
+
+> API summary
+```
+POST   /api/products
+GET    /api/products
+GET    /api/products/{id}
+PUT    /api/products/{id}
+DELETE /api/products/{id}
 ```
