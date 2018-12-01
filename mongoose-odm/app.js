@@ -61,6 +61,42 @@ app.get('/api/products/:productId', (req, res, next) => {
         });
 });
 
+app.put('/api/products/:productId', (req, res, next) => {
+    const productId   = req.params.productId;
+    const title       = req.body.title;
+    const imageUrl    = req.body.imageUrl;
+    const price       = req.body.price;
+    const description = req.body.description;
+
+    Product.findById(productId)
+        .then(product => {
+            product.title       = title;
+            product.imageUrl    = imageUrl;
+            product.price       = price;
+            product.description = description;
+
+            product.save();
+        })
+        .then(result => {
+            res.send('OK');
+        })
+        .catch(err => {
+            res.status(500).send('Boom!');
+        });
+});
+
+app.delete('/api/products/:productId', (req, res, next) => {
+    const productId = req.params.productId;
+
+    Product.findOneAndRemove(productId)
+        .then(result => {
+            res.send('OK');
+        })
+        .catch(err => {
+            res.status(500).send('Crash!');
+        });
+});
+
 mongoose.connect(conStr, authOpt)
     .then(result => {
         console.log('The app is running on 3000...');
