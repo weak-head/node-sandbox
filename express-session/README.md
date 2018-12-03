@@ -17,4 +17,7 @@ curl -i \
      --request GET \
      --cookie cookies.txt \
      http://localhost:3000/api/resource
+
+# check the session cookies via redis browser
+xdg-open http://localhost:4567/#/sess
 ```
