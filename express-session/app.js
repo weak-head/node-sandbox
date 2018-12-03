@@ -3,10 +3,16 @@ const app     = express();
 
 const session = require('express-session');
 
+const RedisStore = require('connect-redis')(session);
+
 app.use(express.json());
 app.use(session({ secret: 'some secure value'
                 , resave: false
-                , saveUninitialized: false}))
+                , saveUninitialized: false
+                , store: new RedisStore({
+                    host: process.env.REDIS_HOST,
+                    port: process.env.REDIS_PORT
+                })}));
 
 app.post('/api/login', (req, res, next) => {
     const login    = req.body.login;

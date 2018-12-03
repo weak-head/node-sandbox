@@ -1,6 +1,9 @@
 # express-cookie-session
 
 ```bash
+# start the app and redis
+docker-compose up
+
 # get the session cookie
 curl -i \
      --header "Content-Type:application/json; charset=UTF-8" \
