@@ -27,7 +27,7 @@ app.get('/api/v1/resource', (req, res, next) => {
     // It's only for demonstration purposes and still hurts my eyes.
     const isAuth = cookie == undefined ? false : cookie.split('=')[1];
 
-    if (isAuth) {
+    if (isAuth == 'True') {
         res.status(200).send('OK');
     } else {
         res.status(401).send('Unauthorized');

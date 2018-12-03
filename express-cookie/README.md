@@ -1,7 +1,6 @@
 # express-cookie
 
 ```bash
-
 # get the auth cookie
 curl -i \
      --header "Content-Type:application/json; charset=UTF-8" \
@@ -15,6 +14,4 @@ curl -i \
     --request GET \
     --cookie cookies.txt \
     http://localhost:3000/api/v1/resource
-
-
 ```
