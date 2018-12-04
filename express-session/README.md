@@ -18,6 +18,18 @@ curl -i \
      --cookie cookies.txt \
      http://localhost:3000/api/resource
 
-# check the session cookies via redis browser
+# check the session cookies via the redis browser
+xdg-open http://localhost:4567/#/sess
+
+# logout to discard the session
+curl -i --request POST http://localhost:3000/api/logout
+
+# try to access the resource
+curl -i \
+     --request GET \
+     --cookie cookies.txt \
+     http://localhost:3000/api/resource
+
+# check the session cookies via the redis browser
 xdg-open http://localhost:4567/#/sess
 ```

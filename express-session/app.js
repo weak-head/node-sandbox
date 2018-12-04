@@ -26,6 +26,16 @@ app.post('/api/login', (req, res, next) => {
     }
 });
 
+app.post('/api/logout', (req, res, next) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.log(err);
+            return next(err);
+        }
+        res.status(200).send('OK');
+    });
+});
+
 app.get('/api/resource', (req, res, next) => {
     console.log(req.session);
 
