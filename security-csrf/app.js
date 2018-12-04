@@ -29,7 +29,30 @@ app.use((req, res, next) => {
     next();
 });
 
+// UI message handler
+app.get('/message', (req, res, next) => {
+    res.render('message', {
+        pageTitle: "Send message",
+        isAuthenticated: res.locals.isAuthenticated,
+        csrfToken: res.locals.csrfToken
+    });
+});
 
+// protected against CSRF
+app.post('/api/message', (req, res, next) => {
+    const title = req.body.title;
+    const body  = req.body.body;
+
+    console.log(`${title} - ${body}`);
+
+    res.redirect('/message');
+});
+
+app.get('/', (req, res, next) => {
+    res.redirect('/message')
+});
+
+// final terminator that results in 404
 app.use((req, res, next) => {
     res.status(404)
        .render('404', {

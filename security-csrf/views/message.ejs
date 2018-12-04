@@ -1,0 +1,18 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+<form class="message-form" action="/api/message/" method="POST">
+    <div class="form-control">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title">
+    </div>
+    <div class="form-control">
+        <label for="body">Body</label>
+        <input type="body" name="body" id="body">
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn" type="submit">Send message</button>
+</form>
+
+<%- include('includes/end.ejs') %>
