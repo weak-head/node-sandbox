@@ -26,3 +26,7 @@
 
 - [route protection](security-route/)
 - [csrf protection](security-csrf/)
+
+### API
+- [rest](api-rest/)
+- [graphql](api-graphql/)
