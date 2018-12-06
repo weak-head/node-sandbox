@@ -7,6 +7,7 @@ const commentController = require('../controllers/comment');
 
 router.get('/', commentController.getComments);
 
+// post route with message body validation
 router.post('/create', [
     body('title').trim().isLength({min: 5}),
     body('content').trim().isLength({min: 10})

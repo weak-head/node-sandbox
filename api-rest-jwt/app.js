@@ -4,6 +4,8 @@ const path    = require('path');
 
 const commentRouter = require('./routes/comment');
 
+// --------------------------------------------------------
+// Configuring multi-part data handling (image uploads)
 const multer      = require('multer');
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,6 +27,12 @@ const fileFilter = (req, file, cb) => {
 };
 
 
+// --------------------------------------------------------
+// Middlewares:
+//   - json
+//   - static html hosting
+//   - CORS
+//   - multi-part data handling
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'frontend')));
 app.use((req, res, next) => {
@@ -36,6 +44,8 @@ app.use((req, res, next) => {
 app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 
 
+// --------------------------------------------------------
+// API routing
 app.use('/api/comments', commentRouter);
 
 
