@@ -22,7 +22,10 @@ curl -i \
 xdg-open http://localhost:4567/#/sess
 
 # logout to discard the session
-curl -i --request POST http://localhost:3000/api/logout
+curl -i \
+     --request POST \
+     --cookie cookies.txt \
+     http://localhost:3000/api/logout
 
 # try to access the resource
 curl -i \
