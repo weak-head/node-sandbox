@@ -9,11 +9,17 @@ exports.getComments = (req, res, next) => {
 exports.postComment = (req, res, next) => {
     const errors = validationResult(req);
 
+    // request body validation check
     if (!errors.isEmpty()) {
         return res.status(422).json({
             message: 'Validation failed',
             errors: errors.array()
         });
+    }
+
+    // attached image
+    if (req.file) {
+        console.log(req.file);
     }
 
     const title   = req.body.title;

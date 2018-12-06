@@ -28,6 +28,7 @@
 - [csrf protection](security-csrf/)
 
 ### API
+
 - [rest](api-rest/)
-- [rest (jwt with request validation)](api-rest-jwt/)
+- [rest (multipart data, jwt, validation)](api-rest-jwt/)
 - [graphql](api-graphql/)
