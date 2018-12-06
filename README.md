@@ -29,4 +29,5 @@
 
 ### API
 - [rest](api-rest/)
+- [rest (jwt with request validation)](api-rest-jwt/)
 - [graphql](api-graphql/)
