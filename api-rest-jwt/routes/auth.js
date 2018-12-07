@@ -21,4 +21,17 @@ authRouter.post('/signup', [
         .isLength({min: 5})
 ], authController.postSignup);
 
+authRouter.post('/login', [
+    body('email')
+        .isEmail()
+        .withMessage('Please enter a valid email.')
+        .custom((value, {req}) => {
+            if (!authController.isKnownUser(value)){
+                return Promise.reject('User with this email does not exist');
+            }
+            return true;
+        })
+        .normalizeEmail()
+], authController.postLogin);
+
 module.exports = authRouter;
