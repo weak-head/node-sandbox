@@ -5,10 +5,12 @@ const { body } = require('express-validator/check');
 
 const commentController = require('../controllers/comment');
 
-router.get('/', commentController.getComments);
+const isAuth = require('../middlewares/is-auth').isAuth;
+
+router.get('/', isAuth, commentController.getComments);
 
 // post route with message body validation
-router.post('/create', [
+router.post('/create', isAuth, [
     body('title').trim().isLength({min: 5}),
     body('content').trim().isLength({min: 10})
 ], commentController.postComment);

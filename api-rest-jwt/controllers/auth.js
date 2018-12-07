@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const jwt    = require('jsonwebtoken');
 
-const TOKEN_KEY = 'SecretPrivateKey';
+const AUTH_KEY = require('../middlewares/is-auth').AUTH_KEY;
 
 const users = [];
 
@@ -60,7 +60,7 @@ exports.postLogin = (req, res, next) => {
                 {
                     email: theUser.email
                 },
-                TOKEN_KEY,
+                AUTH_KEY,
                 {
                     expiresIn: '1h'
                 });
