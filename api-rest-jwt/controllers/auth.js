@@ -7,20 +7,10 @@ const TOKEN_KEY = 'SecretPrivateKey';
 const users = [];
 
 exports.postSignup = (req, res, next) => {
-
-    // in case if validation fails
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        error.statusCode = 422;
-        error.data = errors.array();
-        throw error;
-    }
-
     const email = req.body.email;
     const pwd   = req.body.password;
 
-    // hashing password to avoid any kind of security leaks
+    // hashing password to avoid any kind of privacy leaks
     bcrypt
         .hash(pwd, 12)
         .then(hashedPwd => {
@@ -44,15 +34,6 @@ exports.postSignup = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-    // in case if validation fails
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        error.statusCode = 422;
-        error.data = errors.array();
-        throw error;
-    }
-
     const email = req.body.email;
     const pwd   = req.body.password;
 
@@ -99,4 +80,18 @@ exports.postLogout = (req, res, next) => {
 
 exports.isKnownUser = email => {
    return users.find(itm => itm.email === email) !== undefined;
-}
+};
+
+exports.validationHandler = (req, res, next) => {
+    // in case if validation fails
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const error = new Error('Validation failed.');
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+    }
+
+    next();
+};

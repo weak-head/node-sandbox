@@ -19,7 +19,7 @@ authRouter.post('/signup', [
     body('password')
         .trim()
         .isLength({min: 5})
-], authController.postSignup);
+], authController.validationHandler, authController.postSignup);
 
 authRouter.post('/login', [
     body('email')
@@ -32,6 +32,6 @@ authRouter.post('/login', [
             return true;
         })
         .normalizeEmail()
-], authController.postLogin);
+], authController.validationHandler, authController.postLogin);
 
 module.exports = authRouter;
