@@ -3,6 +3,7 @@ const app     = express();
 const path    = require('path');
 
 const commentRouter = require('./routes/comment');
+const authRouter    = require('./routes/auth');
 
 // --------------------------------------------------------
 // Configuring multi-part data handling (image uploads)
@@ -47,10 +48,23 @@ app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 // --------------------------------------------------------
 // API routing
 app.use('/api/comments', commentRouter);
+app.use('/api/auth', authRouter);
 
+
+// --------------------------------------------------------
+// Final error handlers
+app.use((error, req, res, next) => {
+    console.log(error);
+    const status  = error.statusCode || 500;
+    const message = error.message;
+    const data    = error.data;
+    res.status(status)
+       .json({ message: message, data: data });
+});
 
 app.use((req, res, next) => {
-    res.status(404).send('Not found');
+    res.status(404)
+       .send('Not found');
 });
 
 app.listen(8080);
