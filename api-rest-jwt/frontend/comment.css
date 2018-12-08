@@ -20,5 +20,6 @@ hr {
 }
 
 .container {
-    
+    display: grid;
+    place-items: center;
 }
