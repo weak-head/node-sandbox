@@ -50,6 +50,9 @@ app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 app.use('/api/comments', commentRouter);
 app.use('/api/auth', authRouter);
 
+app.get('/', (req, res, next) => {
+    res.redirect('/comment.html');
+});
 
 // --------------------------------------------------------
 // Final error handlers

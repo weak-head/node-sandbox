@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="comment.css">
 </head>
 <body>
-    <label>post via form:</label>
+    <!-- <label>post via form:</label>
     <form action="/api/comments/create" method="POST" enctype="multipart/form-data">
         <div class="form-control">
             <label for="title">title:</label>
@@ -14,22 +14,46 @@
         </div>
         <input type="file" name="image">
         <button type="submit">Create</button>
-    </form>
+    </form> -->
+
+    <div class="container">
+        <h3>Signup and Login</h3>
+        <div class="form-control">
+            <label for="email">email:</label>
+            <input type="text" name="email" id="email" >
+        </div>
+        <div class="form-control">
+            <label for="password">password:</label>
+            <input type="password" name="password" id="password" >
+        </div>
+        <button type="button" name="button_signup" id="button_signup">Signup</button>
+        <button type="button" name="button_login" id="button_login">Login</button>
+    </div>
 
     <br>
     <hr>
 
-    <label>post via javascript:</label>
-    <div class="form-control">
-        <label for="title_2">title:</label>
-        <input type="text" name="title_2" id="title_2" >
+    <div class="container" >
+        <h3>Post comment</h3>
+        <div class="form-control">
+            <label for="title_2">title:</label>
+            <input type="text" name="title_2" id="title_2" >
+        </div>
+        <div class="form-control">
+            <label for="content_2">content:</label>
+            <input type="text" name="content_2" id="content_2">
+        </div>
+        <input type="file" name="image_2" id="image_2">
+        <button type="button" name="button_2" id="button_2">Post</button>
     </div>
-    <div class="form-control">
-        <label for="content_2">content:</label>
-        <input type="text" name="content_2" id="content_2">
+
+    <br>
+    <hr>
+
+    <div class="container">
+        <h3>Response body:</h3>
+        <div id="status"></div>
     </div>
-    <input type="file" name="image_2" id="image_2">
-    <button type="button" name="button_2" id="button_2">Create</button>
 
     <script type="text/javascript" src="comment.js"></script>
 </body>
