@@ -2,6 +2,7 @@ const emailInput    = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const signupButton  = document.getElementById('button_signup');
 const loginButton   = document.getElementById('button_login');
+const logoutButton  = document.getElementById('button_logout');
 
 const titleInput    = document.getElementById('title_2');
 const contentInput  = document.getElementById('content_2');
@@ -57,6 +58,11 @@ loginButton.addEventListener('click', () => {
             const jwtToken = res.token;
             localStorage.setItem('jwtToken', jwtToken);
         });
+});
+
+// Logout
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('jwtToken');
 });
 
 // Post message
