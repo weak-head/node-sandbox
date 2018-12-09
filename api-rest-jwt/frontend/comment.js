@@ -22,26 +22,14 @@ signupButton.addEventListener('click', () => {
 
     const url = 'http://localhost:8080/api/auth/signup';
 
-    fetch(url, {
+    handleFetch(() => fetch(url,
+        {
             method: 'POST',
             body: body,
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-        .then(res => {
-            alert(`\n${res.status} - ${res.statusText}`);
-            console.log(res);
-            return res;
-        })
-        .then(res => res.json())
-        .then(res => {
-            statusOutput.innerHTML = JSON.stringify(res);
-        })
-        .catch(err => {
-            alert(`error!\n${res.status} - ${res.statusText}`);
-            console.log(res);
-        })
+        }));
 });
 
 // Post message
@@ -57,16 +45,53 @@ createButton.addEventListener('click', () => {
 
     const url = 'http://localhost:8080/api/comments/create';
 
-    fetch(url, { method: 'POST', body: formData })
+    handleFetch(() => fetch(url,
+        {
+            method: 'POST',
+            body: formData
+        }));
+});
+
+function handleFetch(fetchPromise) {
+    return fetchPromise()
         .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-                console.log('error!');
-                console.log(res);
-            } else {
-                console.log('ok');
-            }
+            alert(`\n${res.status} - ${res.statusText}`);
+            console.log(res);
+            return res;
+        })
+        .then(res => res.json())
+        .then(res => {
+            statusOutput.innerHTML = syntaxHighlight(res);
+            return res;
         })
         .catch(err => {
-            console.log(err);
-        })
-});
+            alert(`error!\n${res.status} - ${res.statusText}`);
+            console.log(res);
+        });
+}
+
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+
+    json = json.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;');
+
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
