@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="comment.css">
 </head>
+
 <body>
     <!-- <label>post via form:</label>
     <form action="/api/comments/create" method="POST" enctype="multipart/form-data">
@@ -16,41 +17,41 @@
         <button type="submit">Create</button>
     </form> -->
 
-    <div class="container">
-        <h3>Signup and Login</h3>
-        <div class="form-control">
-            <label for="email">email:</label>
-            <input type="text" name="email" id="email" >
-        </div>
-        <div class="form-control">
-            <label for="password">password:</label>
-            <input type="password" name="password" id="password" >
-        </div>
+    <div class="container_grid">
         <div>
-            <button type="button" name="button_signup" id="button_signup">Signup</button>
-            <button type="button" name="button_login" id="button_login">Login</button>
-            <button type="button" name="button_logout" id="button_logout">Logout</button>
+            <h3>Signup and Login</h3>
+            <div class="form-control">
+                <label for="email">email:</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div class="form-control">
+                <label for="password">password:</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                <button type="button" name="button_signup" id="button_signup">Signup</button>
+                <button type="button" name="button_login" id="button_login">Login</button>
+                <button type="button" name="button_logout" id="button_logout">Logout</button>
+            </div>
         </div>
+
+        <div>
+            <h3>Post comment</h3>
+            <div class="form-control">
+                <label for="title_2">title:</label>
+                <input type="text" name="title_2" id="title_2">
+            </div>
+            <div class="form-control">
+                <label for="content_2">content:</label>
+                <input type="text" name="content_2" id="content_2">
+            </div>
+            <div>
+                <input type="file" name="image_2" id="image_2">
+                <button type="button" name="button_2" id="button_2">Post</button>
+            </div>
+        </div>
+
     </div>
-
-    <br>
-    <hr>
-
-    <div class="container" >
-        <h3>Post comment</h3>
-        <div class="form-control">
-            <label for="title_2">title:</label>
-            <input type="text" name="title_2" id="title_2" >
-        </div>
-        <div class="form-control">
-            <label for="content_2">content:</label>
-            <input type="text" name="content_2" id="content_2">
-        </div>
-        <div>
-            <input type="file" name="image_2" id="image_2">
-            <button type="button" name="button_2" id="button_2">Post</button>
-        </div>
-   </div>
 
     <br>
     <hr>

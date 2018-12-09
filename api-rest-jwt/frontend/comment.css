@@ -24,6 +24,14 @@ hr {
     place-items: center;
 }
 
+.container_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-gap: 6rem;
+    place-items: center;
+}
+
 pre { outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .string { color: green; }
 .number { color: darkorange; }
