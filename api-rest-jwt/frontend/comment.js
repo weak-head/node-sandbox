@@ -9,6 +9,7 @@ const imagePicker   = document.getElementById('image_2');
 const createButton  = document.getElementById('button_2');
 
 const statusOutput  = document.getElementById('status');
+const bodyOutput    = document.getElementById('body');
 
 // Signup
 signupButton.addEventListener('click', () => {
@@ -30,6 +31,31 @@ signupButton.addEventListener('click', () => {
                 'Content-Type': 'application/json'
             }
         }));
+});
+
+// Login
+loginButton.addEventListener('click', () => {
+    const email = emailInput.value;
+    const pwd   = passwordInput.value;
+
+    const body = JSON.stringify({
+        email: email,
+        password: pwd
+    });
+
+    const url = 'http://localhost:8080/api/auth/login';
+
+    handleFetch(() => fetch(url,
+        {
+            method: 'POST',
+            body: body,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }))
+        .then(res => {
+            const jwtToken = res.token;
+        });
 });
 
 // Post message
@@ -55,13 +81,15 @@ createButton.addEventListener('click', () => {
 function handleFetch(fetchPromise) {
     return fetchPromise()
         .then(res => {
-            alert(`\n${res.status} - ${res.statusText}`);
+            const statusString = `\n${res.status} - ${res.statusText}`;
+            statusOutput.innerHTML = statusString;
+            alert(statusString);
             console.log(res);
             return res;
         })
         .then(res => res.json())
         .then(res => {
-            statusOutput.innerHTML = syntaxHighlight(res);
+            bodyOutput.innerHTML = syntaxHighlight(res);
             return res;
         })
         .catch(err => {
