@@ -55,6 +55,7 @@ loginButton.addEventListener('click', () => {
         }))
         .then(res => {
             const jwtToken = res.token;
+            localStorage.setItem('jwtToken', jwtToken);
         });
 });
 
@@ -70,12 +71,19 @@ createButton.addEventListener('click', () => {
     formData.append('image', image);
 
     const url = 'http://localhost:8080/api/comments/create';
-
-    handleFetch(() => fetch(url,
-        {
+    const request = {
             method: 'POST',
-            body: formData
-        }));
+            body: formData,
+        };
+
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (jwtToken) {
+        request.headers = {
+            'Authorization': 'Bearer ' + jwtToken
+        }
+    }
+
+    handleFetch(() => fetch(url, request));
 });
 
 function handleFetch(fetchPromise) {
