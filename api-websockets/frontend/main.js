@@ -1,4 +1,7 @@
-const messages = document.getElementById('messages');
+const messages     = document.getElementById('messages');
+const messageInput = document.getElementById('message');
+const sendButton   = document.getElementById('send');
+
 
 var socket = io('http://localhost:8080');
 
@@ -6,15 +9,29 @@ socket.on('connect', () => {
 
 });
 
+socket.on('disconnect', () => {
+
+});
+
 socket.on('messages', data => {
     const msg     = document.createElement("pre");
     msg.innerHTML = syntaxHighlight(data);
 
-    messages.append(li);
+    messages.append(msg);
 });
 
-socket.on('disconnect', () => {
+sendButton.addEventListener('click', () => {
+    const title = 'title';
+    const body  = messageInput.value;
 
+    // send the message to server
+    socket.emit('messages', {
+        action: 'create',
+        message: {
+            title: title,
+            body: body
+        }
+    });
 });
 
 // --------------------
