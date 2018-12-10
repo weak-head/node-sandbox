@@ -17,7 +17,7 @@
 - [sequelize orm](sequelize-orm/)
 - [mongoose odm](mongoose-odm/)
 
-### Cookies, Session and Auth
+### Cookies and Session
 
 - [vanilla cookies](express-cookie/)
 - [session with redis cache](express-session/)
@@ -29,6 +29,7 @@
 
 ### API
 
-- [rest](api-rest/)
-- [rest (multipart data, jwt, validation)](api-rest-jwt/)
+- [naive rest](api-rest/)
+- [advanced rest (multipart data, jwt, validation)](api-rest-jwt/)
+- [websockets](api-websockets/)
 - [graphql](api-graphql/)
