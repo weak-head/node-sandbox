@@ -14,9 +14,24 @@ app.use((req, res, next) => {
 });
 
 app.use('/graphql', graphqlHttp({
-    schema: graphqlSchema.loadSchema(),
-    rootValue: graphqlResolver,
-    graphiql: true
+  schema: graphqlSchema.loadSchema(),
+  rootValue: graphqlResolver,
+  graphiql: true,
+  formatError(err) {
+    if (!err.originalError) {
+      return err;
+    }
+
+    const data    = err.originalError.data;
+    const code    = err.originalError.code || 500;
+    const message = err.message || 'An error occurred.';
+
+    return {
+      message: message,
+      status: code,
+      data: data
+    };
+  }
 }));
 
 app.listen(8080);

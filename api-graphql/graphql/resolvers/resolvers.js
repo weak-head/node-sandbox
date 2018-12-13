@@ -1,3 +1,4 @@
+const { forModel } = require('./validation');
 
 function hello() {
     return {
@@ -7,6 +8,12 @@ function hello() {
 }
 
 function createUser(args, req) {
+
+    forModel(args.userInput)
+        .validateEmail(model => model.email)
+        .validatePassword(model => model.password)
+        .throwIfErrors();
+
     const email = args.userInput.email;
     const name  = args.userInput.name;
     const pwd   = args.userInput.password;
