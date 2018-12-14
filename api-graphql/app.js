@@ -1,11 +1,14 @@
 const express         = require('express');
 
+const { PrivateKey }  = require('./graphql/resolvers/auth');
+
 const graphqlHttp     = require('express-graphql');
 const graphqlSchema   = require('./graphql/schema/schema');
 const graphqlResolver = require('./graphql/resolvers');
 
 const app = express();
 
+// Access Control
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
@@ -20,6 +23,27 @@ app.use((req, res, next) => {
   next();
 });
 
+// Authorization
+app.use((req, res, next) => {
+  req.auth = { isAuth: false };
+
+  const authHeader = req.get('Authorization');
+  if (authHeader) {
+    try {
+      const token         = authHeader.split(' ')[1];
+      const verifiedToken = jwt.verify(token, PrivateKey);
+
+      if (verifiedToken) {
+        req.auth.isAuth    = true;
+        req.auth.userEmail = verifiedToken.email;
+      }
+    } catch {}
+  }
+
+  next();
+});
+
+// GraphQL API handling
 app.use('/graphql', graphqlHttp({
   schema: graphqlSchema.loadSchema(),
   rootValue: graphqlResolver,

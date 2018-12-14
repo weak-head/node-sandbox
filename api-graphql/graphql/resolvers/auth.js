@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+const PrivateKey = 'PrivateKey';
+
 async function login({ email, password }) {
     if (email !== 'admin@email.domain' || password !== 'password') {
         const error = new Error('Invalid credentials');
@@ -10,7 +12,7 @@ async function login({ email, password }) {
     const token = jwt.sign({
         userId: '1',
         email: email
-    }, 'PrivateKey', {
+    }, PrivateKey, {
         expiresIn: '1h'
     });
 
@@ -21,5 +23,6 @@ async function login({ email, password }) {
 }
 
 module.exports = {
-    login: login
+    login: login,
+    PrivateKey: PrivateKey
 }
