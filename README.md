@@ -29,7 +29,7 @@
 
 ### API
 
-- [naive rest](api-rest/)
-- [advanced rest (multipart data, jwt, validation)](api-rest-jwt/)
+- [simple rest](api-rest/)
+- [advanced rest (jwt, validation, multi-part data)](api-rest-jwt/)
 - [websockets](api-websockets/)
-- [graphql](api-graphql/)
+- [graphql (jwt, validation)](api-graphql/)
