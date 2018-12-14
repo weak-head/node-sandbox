@@ -1,5 +1,7 @@
-const userResolver = require('./resolvers/user');
-const authResolver = require('./resolvers/auth');
+const userResolver  = require('./resolvers/user');
+const authResolver  = require('./resolvers/auth');
+const topicResolver = require('./resolvers/topic');
+
 
 function hello() {
     return {
@@ -11,6 +13,8 @@ function hello() {
 
 module.exports = {
     hello: hello,
+
+    getTopics: topicResolver.getTopics,
 
     createUser: userResolver.createUser,
 

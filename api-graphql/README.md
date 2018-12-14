@@ -34,6 +34,32 @@ curl -i \
 And here are a few examples of GraphQL queries and mutations for the project API:
 
 ```graphql
+# login query
+query {
+  login(email:"admin@email.domain", password:"password") {
+    token
+  }
+}
+
+# get topics query
+query {
+  getTopics(author: "any") {
+    caption
+    sections {
+      title
+      creator {
+        name
+      }
+      messages {
+        text
+        creator {
+          name
+        }
+      }
+    }
+  }
+}
+
 # create user mutation
 # this will fail because of invalid email and short password
 mutation {
