@@ -1,4 +1,4 @@
-const { forModel } = require('./validation');
+const { forModel } = require('../validation');
 
 function createUser(args, req) {
 

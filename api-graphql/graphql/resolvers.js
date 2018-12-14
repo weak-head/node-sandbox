@@ -1,5 +1,5 @@
-const userResolver = require('./user');
-const authResolver = require('./auth');
+const userResolver = require('./resolvers/user');
+const authResolver = require('./resolvers/auth');
 
 function hello() {
     return {
