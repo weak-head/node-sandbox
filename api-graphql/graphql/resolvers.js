@@ -15,6 +15,7 @@ module.exports = {
     hello: hello,
 
     getTopics: topicResolver.getTopics,
+    createTopic: topicResolver.createTopic,
 
     createUser: userResolver.createUser,
 

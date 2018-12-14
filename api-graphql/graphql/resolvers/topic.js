@@ -1,3 +1,4 @@
+const { forRequest } = require('../authorization');
 
 function getTopics(author) {
 
@@ -80,6 +81,25 @@ function getTopics(author) {
     ]
 }
 
+function createTopic(args, req) {
+
+    forRequest(req)
+        .requireAdminAccess()
+        .throwIfUnauthorized();
+
+    const caption = args.topicInput.caption;
+    const content = args.topicInput.content;
+
+    console.log(`${caption} - ${content}`);
+
+    return {
+        _id: '101',
+        caption: caption
+    }
+}
+
 module.exports = {
-    getTopics: getTopics
+    getTopics: getTopics,
+
+    createTopic: createTopic
 }

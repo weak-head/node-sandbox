@@ -72,4 +72,16 @@ mutation {
     email
   }
 }
+
+# create topic mutation
+# this will fail without an authorization token
+mutation {
+  createTopic(topicInput: {
+    caption: "The new topic",
+    content: "Topic content"
+  }) {
+    _id
+    caption
+  }
+}
 ```

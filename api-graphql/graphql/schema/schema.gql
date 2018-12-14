@@ -36,6 +36,16 @@ type User {
     status: String
 }
 
+type TopicID {
+    _id: ID!,
+    caption: String!
+}
+
+input TopicInputData {
+    caption: String!
+    content: String!
+}
+
 input UserInputData {
    email: String!
    name: String!
@@ -49,6 +59,8 @@ type AuthData {
 
 type RootMutation {
     createUser(userInput: UserInputData): User!
+
+    createTopic(topicInput: TopicInputData): TopicID!
 }
 
 type RootQuery {

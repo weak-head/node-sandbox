@@ -3,7 +3,7 @@ class RequestAuthorizer {
     constructor(req) {
         this.request = req;
         this.status  = {
-            isAuthorized = false
+            isAuthorized: false
         };
     }
 
@@ -18,6 +18,9 @@ class RequestAuthorizer {
         if (!this.status.isAuthorized) {
             const error = new Error('Unauthorized');
             error.code = 401;
+            error.data = [{
+                message: "The user doesn't have any permissions to access the resource"
+            }];
 
             throw error;
         }
