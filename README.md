@@ -30,6 +30,6 @@
 ### API
 
 - [simple rest](api-rest/)
-- [advanced rest (jwt, validation, multi-part data)](api-rest-jwt/)
+- [advanced rest (jwt, validation, multipart/form-data)](api-rest-jwt/)
 - [websockets](api-websockets/)
-- [graphql (jwt, validation)](api-graphql/)
+- [graphql (jwt, validation, multipart/form-data)](api-graphql/)

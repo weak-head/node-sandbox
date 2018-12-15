@@ -1,6 +1,7 @@
 # api-graphql
 
 ### Run the app:
+
 ```bash
 npm install
 npm start
@@ -11,6 +12,7 @@ To call the GraphQL API you can use:
 * curl / postman / whatever http client you like
 
 ### Skeleton of how to call the GraphQL API using curl:
+
 ```bash
 # query
 curl -i \
@@ -52,6 +54,14 @@ curl -i \
                 "query": "mutation { createTopic(topicInput: { caption: \"The new topic\", content: \"Topic content\" }) { _id caption } }"
              }' \
      http://localhost:8080/graphql
+```
+
+### To upload file using curl (multipart/form-data):
+
+```bash
+curl -i \
+     --form "image=@image.jpg" \
+     http://localhost:8080/upload
 ```
 
 ### A few examples of GraphQL queries and mutations for the project API:

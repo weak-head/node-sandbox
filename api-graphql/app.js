@@ -52,8 +52,8 @@ app.use((req, res, next) => {
 
 
 // Upload files via multi form data
-app.use(fileHandler);
-app.put('/upload', (req, res, next) => {
+app.use('/upload', fileHandler);
+app.post('/upload', (req, res, next) => {
   if (!req.file) {
     return res
       .status(200)
