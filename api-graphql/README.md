@@ -31,6 +31,29 @@ curl -i \
      http://localhost:8080/graphql
 ```
 
+To access the protected route, add JWT token to 'Authorization' header:
+
+```bash
+# login to get the token
+curl -i \
+     --request POST \
+     --header "Content-Type: application/json" \
+     --data '{
+                "query": "query { login(email: \"admin@email.domain\", password: \"password\") { token } }"
+             }' \
+     http://localhost:8080/graphql
+
+# use the token to access the protected resource
+curl -i \
+     --request POST \
+     --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5kb21haW4iLCJpYXQiOjE1NDQ4MzA1OTQsImV4cCI6MTU0NDgzNDE5NH0.pbo3KkD1G9Z8uQFgXbad3XQZ2MHNkhb_S8-fJMWxz_U" \
+     --header "Content-Type: application/json" \
+     --data '{
+                "query": "mutation { createTopic(topicInput: { caption: \"The new topic\", content: \"Topic content\" }) { _id caption } }"
+             }' \
+     http://localhost:8080/graphql
+```
+
 And here are a few examples of GraphQL queries and mutations for the project API:
 
 ```graphql

@@ -1,4 +1,5 @@
 const express         = require('express');
+const jwt             = require('jsonwebtoken');
 
 const { PrivateKey }  = require('./graphql/resolvers/auth');
 
@@ -37,7 +38,9 @@ app.use((req, res, next) => {
         req.auth.isAuth    = true;
         req.auth.userEmail = verifiedToken.email;
       }
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   next();
