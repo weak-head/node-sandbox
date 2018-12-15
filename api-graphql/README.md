@@ -1,6 +1,6 @@
 # api-graphql
 
-To run the app:
+### Run the app:
 ```bash
 npm install
 npm start
@@ -10,7 +10,7 @@ To call the GraphQL API you can use:
 * [GraphiQL web ui](http://localhost:8080/graphql)
 * curl / postman / whatever http client you like
 
-Here is the skeleton to call the GraphQL API using curl:
+### Skeleton of how to call the GraphQL API using curl:
 ```bash
 # query
 curl -i \
@@ -31,7 +31,7 @@ curl -i \
      http://localhost:8080/graphql
 ```
 
-To access the protected route, add JWT token to 'Authorization' header:
+### To access the protected route, add JWT token to 'Authorization' header:
 
 ```bash
 # login to get the token
@@ -54,7 +54,7 @@ curl -i \
      http://localhost:8080/graphql
 ```
 
-And here are a few examples of GraphQL queries and mutations for the project API:
+### A few examples of GraphQL queries and mutations for the project API:
 
 ```graphql
 # login query
