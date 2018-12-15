@@ -31,6 +31,15 @@ function forRequest(req) {
     return new RequestAuthorizer(req);
 }
 
+function requireAuth(req, res, next) {
+    forRequest(req)
+        .requireAdminAccess()
+        .throwIfUnauthorized();
+
+    next();
+}
+
 module.exports = {
-    forRequest: forRequest
+    forRequest: forRequest,
+    requireAuth: requireAuth
 }

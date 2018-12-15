@@ -2,6 +2,7 @@ const express         = require('express');
 const jwt             = require('jsonwebtoken');
 
 const { PrivateKey }  = require('./graphql/resolvers/auth');
+const { requireAuth } = require('./graphql/authorization');
 
 const fileHandler     = require('./file_upload');
 
@@ -52,7 +53,7 @@ app.use((req, res, next) => {
 
 
 // Upload files via multi form data
-app.use('/upload', fileHandler);
+app.use('/upload', requireAuth, fileHandler);
 app.post('/upload', (req, res, next) => {
   if (!req.file) {
     return res
@@ -92,6 +93,17 @@ app.use('/graphql', graphqlHttp({
     };
   }
 }));
+
+
+// File upload error handler
+app.use((error, req, res, next) => {
+    console.log(error);
+    const status  = error.code || 500;
+    const message = error.message;
+    const data    = error.data;
+    res.status(status)
+       .json({ message: message, data: data });
+});
 
 
 app.listen(8080);
