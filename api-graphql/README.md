@@ -11,7 +11,7 @@ To call the GraphQL API you can use:
 * [GraphiQL web ui](http://localhost:8080/graphql)
 * curl / postman / whatever http client you like
 
-### Skeleton of how to call the GraphQL API using curl:
+### Call the GraphQL API using curl:
 
 ```bash
 # query
@@ -33,7 +33,7 @@ curl -i \
      http://localhost:8080/graphql
 ```
 
-### To access the protected route, add JWT token to 'Authorization' header:
+### Access the protected route (add JWT token to 'Authorization' header):
 
 ```bash
 # login to get the token
@@ -56,10 +56,22 @@ curl -i \
      http://localhost:8080/graphql
 ```
 
-### To upload file using curl (multipart/form-data):
+### Upload file using curl (multipart/form-data):
 
 ```bash
+# login to get the token
 curl -i \
+     --request POST \
+     --header "Content-Type: application/json" \
+     --data '{
+                "query": "query { login(email: \"admin@email.domain\", password: \"password\") { token } }"
+             }' \
+     http://localhost:8080/graphql
+
+# upload file using multipart form-data
+curl -i \
+     --request POST \
+     --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5kb21haW4iLCJpYXQiOjE1NDQ5MTc1NDMsImV4cCI6MTU0NDkyMTE0M30.DIpgEHcnWbVVv0n39S732KLmSbmUZLtjMosYI3nWxh4" \
      --form "image=@image.jpg" \
      http://localhost:8080/upload
 ```
