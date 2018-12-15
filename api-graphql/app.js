@@ -3,11 +3,14 @@ const jwt             = require('jsonwebtoken');
 
 const { PrivateKey }  = require('./graphql/resolvers/auth');
 
+const fileHandler     = require('./file_upload');
+
 const graphqlHttp     = require('express-graphql');
 const graphqlSchema   = require('./graphql/schema/schema');
 const graphqlResolver = require('./graphql/resolvers');
 
 const app = express();
+
 
 // Access Control
 app.use((req, res, next) => {
@@ -23,6 +26,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 
 // Authorization
 app.use((req, res, next) => {
@@ -46,6 +50,27 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// Upload files via multi form data
+app.use(fileHandler);
+app.put('/upload', (req, res, next) => {
+  if (!req.file) {
+    return res
+      .status(200)
+      .json({
+        message: 'No file uploaded'
+      });
+  }
+
+  return res
+    .status(201)
+    .json({
+      message: 'File uploaded',
+      filePath: req.file.path
+    });
+})
+
+
 // GraphQL API handling
 app.use('/graphql', graphqlHttp({
   schema: graphqlSchema.loadSchema(),
@@ -67,5 +92,6 @@ app.use('/graphql', graphqlHttp({
     };
   }
 }));
+
 
 app.listen(8080);
