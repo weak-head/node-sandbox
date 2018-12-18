@@ -33,3 +33,10 @@
 - [advanced rest (jwt, validation, multipart/form-data)](api-rest-jwt/)
 - [websockets](api-websockets/)
 - [graphql (jwt, validation, multipart/form-data)](api-graphql/)
+
+### Other topics
+
+- payments (stripe)
+- sending emails (sendgrid)
+- streaming data
+- generating pdfs (pdfkit)
